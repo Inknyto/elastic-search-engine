@@ -1,6 +1,10 @@
 const searchInput = document.getElementById("searchInput");
-const searchButton = document.getElementById("searchButton");
 const searchResults = document.getElementById("searchResults");
+
+const username = "elastic";
+const password = "<passwd>"
+
+
 
 searchInput.addEventListener("input", async () => {
     const query = searchInput.value;
@@ -10,6 +14,7 @@ searchInput.addEventListener("input", async () => {
         method: "GET",
         headers: {
             "Content-Type": "application/json",
+            "Authorization": `Basic ${btoa(`${username}:${password}`)}`  // Basic Authentication
         },
     });
 
@@ -31,7 +36,6 @@ function displayResults(results) {
         const resultDiv = document.createElement("div");
         resultDiv.id = result.id
         resultDiv.innerHTML = ` 
-        <p>id : ${result.id}</p>
         <p>title : ${result.title}</p>
         <p>company_name : ${result.company_name}</p>
         <p>location : ${result.location}</p>
@@ -47,20 +51,32 @@ function showDescription(div){
     let desc = div.querySelector(".description")
     if(
         desc.style.display=="block"
-    ){
-        desc.style.display="none"
-    }else{
-        desc.style.display="block"
+        ){
+            desc.style.display="none"
+        }else{
+            desc.style.display="block"
+        }
     }
-}
+    
+    // <p>id : ${result.id}</p>
 
-
-
-
-
-
-// <p>related_links : ${result.related_links}</p>
-// <p>extensions : ${result.extensions}</p>
-// <p>detected_extensions : ${result.detected_extensions}</p>
-// <p>job_id : ${result.job_id}</p>        
-// <p>job_highlights : ${result.job_highlights}</p>
+    document.addEventListener("DOMContentLoaded", function () {
+        var searchInput = document.getElementById("searchInput");
+    
+        // Get the initial offset of the searchInput
+        var offsetTop = searchInput.offsetTop;
+    
+        // Add a scroll event listener
+        window.addEventListener("scroll", function () {
+            // Check if the window has scrolled past the initial position of the searchInput
+            if (window.scrollY > offsetTop) {
+                searchInput.classList.add("fixed");
+            } else {
+                searchInput.classList.remove("fixed");
+            }
+        });
+    
+        // Smooth transition when adding/removing the "fixed" class
+        searchInput.style.transition = "all 0.3s ease-in-out";
+    });
+    

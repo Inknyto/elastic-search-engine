@@ -1,0 +1,68 @@
+body {
+    margin: 0;
+    height: 100vh;
+    background-image: url("Elevation.jpg");
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    color: white;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    scroll-behavior: smooth;
+}
+
+*{
+    font-family: sans-serif;
+}
+
+#searchInput {
+    margin: 10px;
+    width: 50%;
+    padding: 20px;
+    font-size: 16px;
+    border: none;
+    border-radius: 5px;
+    z-index: 2;
+}
+
+#searchInput.fixed {
+    position: fixed;
+    top: 0;
+    width: 100%;
+    background: rgba(0, 0, 0, 0.7);
+
+    width : 50%;
+    color : black;
+    background-color : white;
+}
+
+#Banner {
+    width: 50%;
+    padding: 20px;
+    box-sizing: border-box;
+    margin: 20px;
+}
+
+#searchResults {
+    width: 50%;
+    background-color: rgba(0, 0, 0, 0.8);
+    padding: 30px;
+    border-radius: 5px;
+    margin-top: 50px;
+    z-index: 1;
+}
+
+/* Responsive Styles */
+/* @media only screen and (max-width: 768px) {
+    #searchInput {
+        width: 80%;
+    }
+
+    #Banner,
+    #searchResults {
+        width: 80%;
+        left: 10%;
+    }
+} */
