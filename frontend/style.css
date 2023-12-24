@@ -27,6 +27,44 @@ body {
     z-index: 2;
 }
 
+.job_result{
+ display: grid;
+ margin-bottom: 10px;
+ grid-template-columns: repeat(2, 1fr);
+}
+
+.description-button{
+    width: 20%;
+}
+
+.skill_category {
+    height: 45px;
+    overflow: scroll; 
+}
+  
+  .skill_category > span {
+    display: inline-block; /* or block, depending on your layout needs */
+    white-space: nowrap; /* Prevent line breaks within spans */
+    overflow: auto; /* Allow content to be scrolled if it overflows */
+    font-weight: bold;
+    padding: 5px;
+    margin: 10px;
+}
+
+.skill{
+    background-color: blueviolet;
+    border-radius: 15px;
+
+}
+
+
+.category_title{
+    width: 90px;
+}
+.job_info{
+    width: 100%;
+}
+
 #searchInput.fixed {
     position: fixed;
     top: 0;
@@ -38,9 +76,6 @@ body {
 #popup{
     width: 50%;
     background-color: black;
-    position: absolute;
-    left: 25%;
-    top: 15%;
     border-radius: 25px;
     padding: 20px;
     border: 15px solid #632c7f;
@@ -53,7 +88,10 @@ body {
     position: fixed;
     top: 0;
     left: 0;
-    z-index: 10;
+    z-index: 11;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 

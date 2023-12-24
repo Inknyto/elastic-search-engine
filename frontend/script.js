@@ -24,21 +24,82 @@ searchInput.addEventListener("input", async () => {
     }));
 });
 
+// function displayResults(results) {
+//     searchResults.innerHTML = "";
+
+//     results.forEach(result => {
+//         // console.log(result)
+//         const resultDiv = document.createElement("div");
+//         resultDiv.classList.add('job_result');
+//         resultDiv.id = result.id
+//         resultDiv.innerHTML = ` 
+//         <div class="job_result">
+//             <div class="job_info">
+//                 <p>title : ${result.title}</p>
+//                 <p>company_name : ${result.company_name}</p>
+//                 <p>location : ${result.location}</p>
+//                 <p>via : ${result.via}</p>
+//                 <p class="description" style="display: none;">description : ${result.description}</p>
+//                 <button class="description-button" onclick="showMore('${result.id}')">More</button>
+//             </div>    
+//             <div class="job_skills">${result.skills}</div>
+            
+//         </div>
+//         `
+//         console.log(result.skills)
+
+//         searchResults.appendChild(resultDiv);
+//     });
+// }
+
+
 function displayResults(results) {
     searchResults.innerHTML = "";
 
     results.forEach(result => {
-        // console.log(result)
         const resultDiv = document.createElement("div");
-        resultDiv.id = result.id
-        resultDiv.innerHTML = ` 
-        <p>title : ${result.title}</p>
-        <p>company_name : ${result.company_name}</p>
-        <p>location : ${result.location}</p>
-        <p>via : ${result.via}</p>
-        <p class="description" style="display: none;">description : ${result.description}</p>
-        <button class="description-button" onclick="showMore('${result.id}')">More</button>
-        `
+        resultDiv.classList.add('job_result');
+        resultDiv.id = result.id;
+
+        const skillsDiv = document.createElement("div");
+        skillsDiv.classList.add('job_skills');
+        head = document.createElement('h3');
+        head.innerText = 'Required_skills:';
+        skillsDiv.appendChild(head);
+
+        // Loop through each skill category
+        for (const category in result.skills) {
+            const categoryDiv = document.createElement("div");
+            categoryDiv.classList.add('skill_category');
+
+            const categoryTitle = document.createElement("span");
+            categoryTitle.classList.add('category_title');
+            categoryTitle.textContent = category;
+            categoryDiv.appendChild(categoryTitle);
+
+            // Loop through each skill in the category
+            result.skills[category].forEach(skill => {
+                const skillSpan = document.createElement("span");
+                skillSpan.classList.add('skill');
+                skillSpan.textContent = skill;
+                categoryDiv.appendChild(skillSpan);
+            });
+            
+            skillsDiv.appendChild(categoryDiv);
+        }
+
+        resultDiv.innerHTML = `
+                <div class="job_info">
+                    <p><strong>title</strong> : ${result.title}</p>
+                    <p><strong>company_name</strong> : ${result.company_name}</p>
+                    <p><strong>location</strong> : ${result.location}</p>
+                    <p><strong>via</strong> : ${result.via}</p>
+                    <p class="description" style="display: none;"><strong>description</strong> : ${result.description}</p>
+                    <button class="description-button" onclick="showMore('${result.id}')">More</button>   
+            </div>
+        `;
+        
+        resultDiv.appendChild(skillsDiv);
         searchResults.appendChild(resultDiv);
     });
 }
